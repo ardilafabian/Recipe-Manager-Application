@@ -48,6 +48,10 @@ are running Vagrant or want to show off your work on other computers on the netw
 py manage.py migrate
 * After when you add more models
 py manage.py makemigrations polls
-* After create migration run again the command to apply changes
+* After create migration run again the command to create real changes
 py manage.py migrate
 
+----------------------------------------------------------------------------------------------
+
+- Open shell
+py manage.py shell
