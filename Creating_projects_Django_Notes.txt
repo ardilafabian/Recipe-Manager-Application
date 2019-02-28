@@ -1,0 +1,53 @@
+Django commands:
+
+----------------------------------------------------------------------------------------------
+
+- VIRTUAL ENVIRONMENTS
+* Install Django (you can do it just on your virtual environment or for all)
++ Windows
+pip install virtualenv virtualenvwrapper-win
++ Linux/Mac
+sudo -H pip install virtualenv virtualenvwrapper
+Add three lines to your shell startup file (.bashrc, .profile, .bash_profile etc.)
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+(Restart the terminal. Now you can use the virtualenvwrapper’s functions)
+
+* Create virtual environment
+mkvirtualenv myenv
+
+* Choose an environment to work
+workon myenv
+
+* Deacivate an environment
+deactivate myenv
+
+----------------------------------------------------------------------------------------------
+
+- Create a project
+django-admin startproject mysite
+
+----------------------------------------------------------------------------------------------
+
+- Create an app:
+py manage.py startapp polls
+
+----------------------------------------------------------------------------------------------
+
+- Run server:
+py manage.py runserver
+py manage.py runserver 8080 -> specify port
+py manage.py runserver 0:8000 -> to listen on all available public IPs (which is useful if you 
+are running Vagrant or want to show off your work on other computers on the network)
+
+----------------------------------------------------------------------------------------------
+
+- Create INSTALLED_APPS configs (mysite/settings.py)
+* Fisrt Time
+py manage.py migrate
+* After when you add more models
+py manage.py makemigrations polls
+* After create migration run again the command to apply changes
+py manage.py migrate
+
