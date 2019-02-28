@@ -55,3 +55,15 @@ py manage.py migrate
 
 - Open shell
 py manage.py shell
+
+----------------------------------------------------------------------------------------------
+
+- Creating an Admin User
+py manage.py createsuperuser
+
+- Acces to Super user
+localhost/admin
+
+--//-- After this you have to relate odel on app/admin.py --//--
+
+----------------------------------------------------------------------------------------------
