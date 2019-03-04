@@ -66,12 +66,12 @@
             <ul class="list-unstyled mt-3 mb-4">
               <li>{{ recipe.description }}</li>
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">View</button>
+            <a href="{% url 'recipeManager:recipeDetail' recipe.id %}" ><button type="button" class="btn btn-lg btn-block btn-outline-primary">View</button></a>
           </div>
         </div>
       {% endfor %}
     {% else %}
-      <p>No recipes available.</p>
+      <p><strong>No recipes available.</strong></p>
     {% endif %}
   </div>
 
