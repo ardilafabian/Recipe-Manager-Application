@@ -12,7 +12,7 @@ Add three lines to your shell startup file (.bashrc, .profile, .bash_profile etc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
-(Restart the terminal. Now you can use the virtualenvwrapper’s functions)
+(Restart the terminal. Now you can use the virtualenvwrapperï¿½s functions)
 
 * Create virtual environment
 mkvirtualenv myenv
@@ -38,7 +38,7 @@ py manage.py startapp polls
 - Run server:
 py manage.py runserver
 py manage.py runserver 8080 -> specify port
-py manage.py runserver 0:8000 -> to listen on all available public IPs (which is useful if you 
+py manage.py runserver 0:8000 -> to listen on all available public IPs (which is useful if you
 are running Vagrant or want to show off your work on other computers on the network)
 
 ----------------------------------------------------------------------------------------------
