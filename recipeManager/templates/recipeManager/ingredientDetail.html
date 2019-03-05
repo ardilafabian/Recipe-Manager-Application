@@ -62,7 +62,7 @@
           <li><b>ID:</b> {{ ingredient.id }}</li>
           <li><b>Price:</b> {{ ingredient.cost }}</li>
           <li><b>Amount:</b> {{ ingredient.amount }}</li>
-          <li><b>Units:</b> {{ Ingredient.UNIT_CHOICES }}</li>
+          <li><b>Units:</b> {{ ingredient.get_unit_display }}</li>
         </ul>
         <div class="container">
           <div class="card-deck mb-3 text-center">
