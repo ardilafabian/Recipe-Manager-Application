@@ -46,30 +46,27 @@
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Ingredients</h1>
+  <h1 class="display-4">{{ ingredient.name }}</h1>
   <!--<p class="lead">Manage your recipes and ingredients in an easy way.</p>-->
 </div>
 
 <div class="container">
   <div class="card-deck mb-3 text-center">
-    {% if ingredients_list %}
-      {% for ingredient in ingredients_list %}
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">{{ ingredient.name }}</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>
-            <!--<ul class="list-unstyled mt-3 mb-4">
-              <li>{{ ingredient.description }}</li>
-            </ul>-->
-            <a href="{% url 'recipeManager:ingredientDetail' ingredient.id %}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">View</button></a>
-          </div>
-        </div>
-      {% endfor %}
-    {% else %}
-      <p><strong>No ingredients available.</strong></p>
-    {% endif %}
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal"><small class="text-muted">ID: </small> {{ ingredient.id }}</h4>
+      </div>
+      <div class="card-body">
+        <!--<h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>-->
+        <ul class="list-unstyled mt-3 mb-4">
+          <li><b>ID:</b> {{ ingredient.id }}</li>
+          <li><b>Price:</b> {{ ingredient.cost }}</li>
+          <li><b>Amount:</b> {{ ingredient.amount }}</li>
+          <li><b>Units:</b> {{ Ingredient.UNIT_CHOICES }}</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary">View</button>
+      </div>
+    </div>
   </div>
 
   <footer class="pt-4 my-md-5 pt-md-5 border-top">

@@ -20,3 +20,7 @@ class IngredientsView(generic.ListView):
 class RecipeDetailView(generic.DetailView):
     model = Recipe
     template_name = 'recipeManager/recipeDetail.html'
+
+class IngredientDetailView(generic.DetailView):
+    model = Ingredient
+    template_name = 'recipeManager/ingredientDetail.html'
