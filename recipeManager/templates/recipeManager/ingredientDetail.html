@@ -64,7 +64,16 @@
           <li><b>Amount:</b> {{ ingredient.amount }}</li>
           <li><b>Units:</b> {{ Ingredient.UNIT_CHOICES }}</li>
         </ul>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">View</button>
+        <div class="container">
+          <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+              <a href="{% url 'recipeManager:ingredients'%}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Return</button></a>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <a href="#"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Edit</button></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
