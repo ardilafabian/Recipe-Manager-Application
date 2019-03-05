@@ -26,6 +26,11 @@
         user-select: none;
       }
 
+      li {
+        border-top: 10px;
+        border-bottom: 10px;
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -61,18 +66,19 @@
       </div>
       <div class="card-body">
         <!--<h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>-->
+
         <ul id="editOptions" class="list-unstyled mt-3 mb-4">
           <li>
-            <label for="ingredient{{ ingredient.id }}"><b>Price:</b></label><br>
-            <input type="text" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
+            <label for="ingredient{{ ingredient.id }}"><b>Price:</b></label>
+            <input class="text-dark" type="text" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
           </li>
           <li>
-            <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label><br>
-            <input type="text" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
+            <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
+            <input class="text-dark" type="text" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
           </li>
           <li>
-            <label for="ingredient{{ ingredient.id }}"><b>Unit:</b></label><br>
-            <input type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">
+            <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
+            <input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">
           </li>
         </ul>
         <ul id="readingOptions" class="list-unstyled mt-3 mb-4">
