@@ -10,6 +10,13 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Recipe.objects.all()
 
+class IngredientsView(generic.ListView):
+    template_name = 'recipeManager/ingredients.html'
+    context_object_name = 'ingredients_list'
+
+    def get_queryset(self):
+        return Ingredient.objects.all()
+
 class RecipeDetailView(generic.DetailView):
     model = Recipe
     template_name = 'recipeManager/recipeDetail.html'
