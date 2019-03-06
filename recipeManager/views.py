@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Recipe, Ingredient
 
@@ -26,5 +28,16 @@ class IngredientDetailView(generic.DetailView):
     template_name = 'recipeManager/ingredientDetail.html'
 
 def updateIngredient(request, ingredient_id):
-    print(request.POST)
-    return render(request, 'recipeManager/ingredientDetail.html', {'ingredient':Ingredient.objects.get(pk=1)})
+    #print(request.POST)
+    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+    itChanged = False
+
+    if ingredient.name != request.POST['name']: ingredient.name, itChanged = request.POST['name'], True
+    if ingredient.cost != request.POST['cost']: ingredient.cost, itChanged = request.POST['cost'], True
+    if ingredient.amount != request.POST['amount']: ingredient.amount, itChanged = request.POST['amount'], True
+    if ingredient.unit != request.POST['unit']: ingredient.unit, itChanged = request.POST['unit'], True
+
+    if itChanged:
+        ingredient.save()
+
+    return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))

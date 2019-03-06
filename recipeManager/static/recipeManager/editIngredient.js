@@ -3,6 +3,7 @@ $(document).ready(function() {
     $("#editOptions").hide();
     $("#saveButtonSection").hide();
     $("#idField").hide();
+    $("#nameField").hide();
 
     $("#editButton").click(function() {
         console.log("Oculta acciones!");
@@ -10,10 +11,12 @@ $(document).ready(function() {
         $("#editButtonSection").hide();
         $("#returnButtonSection").hide();
         $("#card-header").hide();
+        $("#ingredientName").hide();
 
         $("#editOptions").show();
         $("#saveButtonSection").show();
         $("#idField").show();
+        $("#nameField").show();
     });
 
     $("#saveButton").click(function() {
@@ -23,6 +26,7 @@ $(document).ready(function() {
         $("#readingOptions").show();
         $("#editButtonSection").show();
         $("#returnButtonSection").show();
+        $("#ingredientName").hide();
     });
 
     $("#ingredientId").click(function() {
