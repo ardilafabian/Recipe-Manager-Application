@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.urls import reverse
 
 app_name = 'recipeManager'
 urlpatterns = [
@@ -8,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/', views.RecipeDetailView.as_view(), name='recipeDetail'),
     path('ingredient/<int:pk>/', views.IngredientDetailView.as_view(), name='ingredientDetail'),
     path('ingredient/<int:ingredient_id>/update/', views.updateIngredient, name='updateIngredient'),
+    path('ingredients/add/', views.AddIngredientView.as_view(), name='addIngredient'),
 ]

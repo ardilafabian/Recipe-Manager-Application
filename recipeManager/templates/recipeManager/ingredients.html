@@ -26,7 +26,7 @@
     <a class="p-2 text-dark" href="{% url 'recipeManager:index' %}">Recipes</a>
     <a class="p-2 text-dark" href="{% url 'recipeManager:ingredients' %}">Ingredients</a>
   </nav>
-  <a class="btn btn-outline-primary" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Ingredient</a>
+  <a class="btn btn-outline-primary" href="{% url 'recipeManager:addIngredient'%}">Add Ingredient</a>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

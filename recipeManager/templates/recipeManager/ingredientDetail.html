@@ -65,11 +65,11 @@
             </li>
             <li>
               <label for="ingredient{{ ingredient.id }}"><b>Cost:</b></label>
-              <input class="text-dark" type="text" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
+              <input class="text-dark" type="number" step="0.01" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
             </li>
             <li>
               <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
-              <input class="text-dark" type="text" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
+              <input class="text-dark" type="number" step="0.01" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
             </li>
             <li>
               <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>

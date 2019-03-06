@@ -27,6 +27,13 @@ class IngredientDetailView(generic.DetailView):
     model = Ingredient
     template_name = 'recipeManager/ingredientDetail.html'
 
+class AddIngredientView(generic.CreateView):
+    model = Ingredient
+    template_name = 'recipeManager/addIngredient.html'
+    fields = ['name', 'cost', 'amount', 'unit']
+    def get_success_url(self):
+        return reverse('recipeManager:ingredientDetail', args=(self.object.id,))
+
 def updateIngredient(request, ingredient_id):
     #print(request.POST)
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
