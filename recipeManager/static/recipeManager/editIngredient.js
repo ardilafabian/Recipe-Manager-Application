@@ -5,16 +5,18 @@ $(document).ready(function() {
     $("#cancelButtonSection").hide();
     $("#idField").hide();
     $("#nameField").hide();
+    $("#headerIngredientEditLabel").hide();
 
     $("#editButton").click(function() {
         console.log("Oculta acciones!");
         $("#readingOptions").hide();
         $("#editButtonSection").hide();
         $("#returnButtonSection").hide();
-        $("#card-header").hide();
+        $("#headerIngredientName").hide();
         $("#ingredientName").hide();
 
         $("#editOptions").show();
+        $("#headerIngredientEditLabel").show();
         $("#saveButtonSection").show();
         $("#cancelButtonSection").show();
         $("#idField").show();
