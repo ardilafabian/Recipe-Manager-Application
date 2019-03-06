@@ -24,3 +24,7 @@ class RecipeDetailView(generic.DetailView):
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
     template_name = 'recipeManager/ingredientDetail.html'
+
+def updateIngredient(request, ingredient_id):
+    print(request.POST)
+    return render(request, 'recipeManager/ingredientDetail.html', {'ingredient':Ingredient.objects.get(pk=1)})

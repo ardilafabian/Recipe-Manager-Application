@@ -61,45 +61,57 @@
 <div class="container">
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal"><small class="text-muted">ID: </small> {{ ingredient.id }}</h4>
-      </div>
-      <div class="card-body">
-        <!--<h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>-->
+      <form action="{% url 'recipeManager:updateIngredient' ingredient.id %}" method="post">
+      {% csrf_token %}
+        <div class="card-header" id="card-header">
+          <h4 class="my-0 font-weight-normal"><small class="text-muted">ID: </small> {{ ingredient.id }}</h4>
+        </div>
+        <div class="card-body">
+          <!--<h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>-->
 
-        <ul id="editOptions" class="list-unstyled mt-3 mb-4">
-          <li>
-            <label for="ingredient{{ ingredient.id }}"><b>Price:</b></label>
-            <input class="text-dark" type="text" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
-          </li>
-          <li>
-            <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
-            <input class="text-dark" type="text" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
-          </li>
-          <li>
-            <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
-            <input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">
-          </li>
-        </ul>
-        <ul id="readingOptions" class="list-unstyled mt-3 mb-4">
-          <li><b>Cost:</b> {{ ingredient.cost }}</li>
-          <li><b>Amount:</b> {{ ingredient.amount }}</li>
-          <li><b>Units:</b> {{ ingredient.get_unit_display }}</li>
-        </ul>
-        <div class="container">
-          <div class="card-deck mb-3 text-center">
-            <div id="returnButtonSection" class="card mb-4 shadow-sm">
-              <a href="{% url 'recipeManager:ingredients'%}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Return</button></a>
+          <ul id="editOptions" class="list-unstyled mt-3 mb-4">
+            <li id="idField">
+              <label for="ingredient{{ ingredient.id }}"><b>ID:</b></label>
+              <input type="text" name="id" id="ingredientId" readonly="readonly" value="{{ ingredient.id }}">
+            </li>
+            <li>
+              <label for="ingredient{{ ingredient.id }}"><b>Cost:</b></label>
+              <input class="text-dark" type="text" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
+            </li>
+            <li>
+              <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
+              <input class="text-dark" type="text" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
+            </li>
+            <li>
+              <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
+              <input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">
+            </li>
+          </ul>
+          <div class="container">
+            <div class="card-deck mb-3 text-center">
+              <div id="saveButtonSection" class="card mb-4 shadow-sm">
+                <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-primary">Save</button>
+              </div>
             </div>
-            <div id="editButtonSection" class="card mb-4 shadow-sm">
-              <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-primary">Edit</button>
-            </div>
-            <div id="saveButtonSection" class="card mb-4 shadow-sm">
-              <button id="saveButton" type="button" class="btn btn-lg btn-block btn-outline-primary">Save</button>
+          </div>
+
+          <ul id="readingOptions" class="list-unstyled mt-3 mb-4">
+            <li><b>Cost:</b> {{ ingredient.cost }}</li>
+            <li><b>Amount:</b> {{ ingredient.amount }}</li>
+            <li><b>Units:</b> {{ ingredient.get_unit_display }}</li>
+          </ul>
+          <div class="container">
+            <div class="card-deck mb-3 text-center">
+              <div id="returnButtonSection" class="card mb-4 shadow-sm">
+                <a href="{% url 'recipeManager:ingredients'%}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Return</button></a>
+              </div>
+              <div id="editButtonSection" class="card mb-4 shadow-sm">
+                <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-primary">Edit</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 
