@@ -90,11 +90,19 @@
             </li>
             <li>
               <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
-              <input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">
+              <select class="text-dark" name="unit">
+                {% for unit_choice_symbol, unit_choice  in ingredient.UNIT_CHOICES %}
+                  <option value="{{ unit_choice_symbol }}">{{ unit_choice }}</option>
+                {% endfor %}
+              </select>
+              <!--<input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">-->
             </li>
           </ul>
           <div class="container">
             <div class="card-deck mb-3 text-center">
+              <div id="cancelButtonSection" class="card mb-4 shadow-sm">
+                <a href="{% url 'recipeManager:ingredientDetail' ingredient.id %}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Cancel</button></a>
+              </div>
               <div id="saveButtonSection" class="card mb-4 shadow-sm">
                 <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-primary">Save</button>
               </div>

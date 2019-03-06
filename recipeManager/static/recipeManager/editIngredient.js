@@ -2,6 +2,7 @@ $(document).ready(function() {
     console.log("Hide ptions!");
     $("#editOptions").hide();
     $("#saveButtonSection").hide();
+    $("#cancelButtonSection").hide();
     $("#idField").hide();
     $("#nameField").hide();
 
@@ -15,6 +16,7 @@ $(document).ready(function() {
 
         $("#editOptions").show();
         $("#saveButtonSection").show();
+        $("#cancelButtonSection").show();
         $("#idField").show();
         $("#nameField").show();
     });
@@ -22,6 +24,7 @@ $(document).ready(function() {
     $("#saveButton").click(function() {
         $("#editOptions").hide();
         $("#saveButtonSection").hide();
+        $("#cancelButtonSection").hide();
 
         $("#readingOptions").show();
         $("#editButtonSection").show();
