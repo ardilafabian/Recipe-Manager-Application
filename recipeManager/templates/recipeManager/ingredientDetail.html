@@ -56,28 +56,38 @@
 
           <ul id="editOptions" class="list-unstyled mt-3 mb-4">
             <li id="idField">
-              <label for="ingredient{{ ingredient.id }}"><b>ID:</b></label>
-              <input type="text" name="id" id="ingredientId" readonly="readonly" value="{{ ingredient.id }}">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="ingredient{{ ingredient.id }}"><b>ID:</b></label>
+                <input class="form-control text-dark" type="text" name="id" id="ingredientId" value="{{ ingredient.id }}">
+              </div>
             </li>
             <li id="nameField">
-              <label for="ingredient{{ ingredient.id }}"><b>Name:</b></label>
-              <input type="text" name="name" value="{{ ingredient.name }}">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="ingredient{{ ingredient.id }}"><b>Name:</b></label>
+                <input class="form-control text-dark" type="text" name="name" value="{{ ingredient.name }}">
+              </div>
             </li>
             <li>
-              <label for="ingredient{{ ingredient.id }}"><b>Cost:</b></label>
-              <input class="text-dark" type="number" step="0.01" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="ingredient{{ ingredient.id }}"><b>Cost:</b></label>
+                <input class="form-control text-dark" type="number" step="0.01" name="cost" id="ingredient{{ ingredient.id }}" value="{{ ingredient.cost }}">
+              </div>
             </li>
             <li>
-              <label for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
-              <input class="text-dark" type="number" step="0.01" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="ingredient{{ ingredient.id }}"><b>Amount:</b></label>
+                <input class="form-control text-dark" type="number" step="0.01" name="amount" id="ingredient{{ ingredient.id }}" value="{{ ingredient.amount }}">
+              </div>
             </li>
             <li>
-              <label class="label" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
-              <select class="text-dark" name="unit">
-                {% for unit_choice_symbol, unit_choice  in ingredient.UNIT_CHOICES %}
-                  <option value="{{ unit_choice_symbol }}">{{ unit_choice }}</option>
-                {% endfor %}
-              </select>
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="ingredient{{ ingredient.id }}"><b>Unit:</b></label>
+                <select class="custom-select text-dark" name="unit">
+                  {% for unit_choice_symbol, unit_choice  in ingredient.UNIT_CHOICES %}
+                    <option value="{{ unit_choice_symbol }}">{{ unit_choice }}</option>
+                  {% endfor %}
+                </select>
+              </div>
               <!--<input class="text-dark" type="text" name="unit" id="ingredient{{ ingredient.id }}" value="{{ ingredient.get_unit_display }}">-->
             </li>
           </ul>

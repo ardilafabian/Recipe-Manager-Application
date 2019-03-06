@@ -46,29 +46,37 @@
         <div class="card-body">
           <ul class="list-unstyled mt-3 mb-4">
             <li>
-              <label for="id_name"><b>Name:</b></label>
-              <input id="id_name" class="text-dark" type="text" required name="name">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="id_name"><b>Name:</b></label>
+                <input id="id_name" class="form-control text-dark" type="text" required name="name">
+              </div>
             </li>
             <li>
-              <label for="id_cost"><b>Cost:</b></label>
-              <input id="id_cost" class="text-dark" type="number" step="0.01" required name="cost">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="id_cost"><b>Cost:</b></label>
+                <input id="id_cost" class="form-control text-dark" type="number" step="0.01" required name="cost">
+              </div>
             </li>
             <li>
-              <label for="id_amount"><b>Amount:</b></label>
-              <input class="text-dark" type="number" name="amount" step="0.01" required id="id_amount">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="id_amount"><b>Amount:</b></label>
+                <input class="form-control text-dark" type="number" name="amount" step="0.01" required id="id_amount">
+              </div>
             </li>
             <li>
-              <label class="label" for="id_unit"><b>Unit:</b></label>
-              {{ form.unit }}
+              <div class="input-group mb-3">
+                <label class="input-group-text" class="label" for="id_unit"><b>Unit:</b></label>
+                {{ form.unit }}
+              </div>
             </li>
           </ul>
           <div class="container">
             <div class="card-deck mb-3 text-center">
               <div id="cancelButtonSection" class="card mb-4 shadow-sm">
-                <a href="{% url 'recipeManager:ingredients' %}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Cancel</button></a>
+                <a href="{% url 'recipeManager:ingredients' %}" style="text-decoration:none;"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Cancel</button></a>
               </div>
               <div id="saveButtonSection" class="card mb-4 shadow-sm">
-                <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-primary">Add</button>
+                <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-success">Add</button>
               </div>
             </div>
           </div>
