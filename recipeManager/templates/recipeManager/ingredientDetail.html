@@ -84,10 +84,10 @@
           <div class="container">
             <div class="card-deck mb-3 text-center">
               <div id="cancelButtonSection" class="card mb-4 shadow-sm">
-                <a href="{% url 'recipeManager:ingredientDetail' ingredient.id %}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Cancel</button></a>
+                <a style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Cancel</button></a>
               </div>
               <div id="saveButtonSection" class="card mb-4 shadow-sm">
-                <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-primary">Save</button>
+                <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-success">Save</button>
               </div>
             </div>
           </div>
@@ -101,10 +101,10 @@
           <div class="container">
             <div class="card-deck mb-3 text-center">
               <div id="returnButtonSection" class="card mb-4 shadow-sm">
-                <a href="{% url 'recipeManager:ingredients'%}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Return</button></a>
+                <a href="{% url 'recipeManager:ingredients'%}" style="text-decoration:none;"><button type="button" class="btn btn-lg btn-block btn-outline-warning">Return</button></a>
               </div>
               <div id="editButtonSection" class="card mb-4 shadow-sm">
-                <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-primary">Edit</button>
+                <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-warning">Edit</button>
               </div>
             </div>
           </div>
