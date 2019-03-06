@@ -35,7 +35,14 @@
 </div>
 
 <div class="container">
+
+  <form class="form-inline my-lg-4" method="get">
+    <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
   <div class="card-deck mb-3 text-center">
+
     {% if ingredients_list %}
       {% for ingredient in ingredients_list %}
         <div class="card mb-4 shadow-sm">

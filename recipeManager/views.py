@@ -17,7 +17,12 @@ class IngredientsView(generic.ListView):
     context_object_name = 'ingredients_list'
 
     def get_queryset(self):
-        return Ingredient.objects.all()
+        ingredients = Ingredient.objects.all()
+        if 'search' in self.request.GET:
+            searchTerm = self.request.GET['search']
+            return ingredients.filter(name__icontains=searchTerm)
+        else:
+            return ingredients
 
 class RecipeDetailView(generic.DetailView):
     model = Recipe
