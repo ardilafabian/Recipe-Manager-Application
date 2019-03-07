@@ -44,20 +44,33 @@
                <table id="table" class="table table-hover" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <thead>
                      <tr>
-                        <th scope="col">Quantity</th>
                         <th scope="col">Ingredient</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit</th>
                      </tr>
                   </thead>
                   <tbody>
                     <tr id="empty">
                       <td>
-                          There not ingredients for this recipe.
+                          There are no ingredients for this recipe.
                       </td>
                     </tr>
                   </tbody>
                </table>
+               <div class="container">
+                  <div class="card-deck mb-3 text-center">
+                     <div id="cancelButtonSection" class="card mb-4 shadow-sm">
+                        <a href="{% url 'recipeManager:index' %}" style="text-decoration:none;">
+                          <button type="button" class="btn btn-lg btn-block btn-outline-danger">Cancel</button>
+                        </a>
+                     </div>
+                     <div id="saveButtonSection" class="card mb-4 shadow-sm">
+                        <button id="saveButton" class="btn btn-lg btn-block btn-outline-success">Add</button>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div class="card mb-4 border-light scrollspy-example" data-offset="0" data-spy="scroll">
+            <div class="card mb-4 border-light">
                 <h4>Ingredients</h4>
                <div class="card-deck mb-3 text-center">
                   <!--<div class="card-header">
@@ -71,6 +84,10 @@
                      </div>
                      <div class="card-body">
                         <h1 id="name{{ ingredient.id }}" class="card-title pricing-card-title">{{ ingredient.name }}</h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                           <li>${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }}</small></li>
+                           <li id="unit{{ ingredient.id }}">{{ ingredient.get_unit_display }}</li>
+                        </ul>
                      </div>
                   </div>
                   {% endfor %}

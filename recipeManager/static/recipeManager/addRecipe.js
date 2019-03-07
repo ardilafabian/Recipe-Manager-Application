@@ -19,10 +19,12 @@ function drop(ev) {
   }
 
   var tr = document.createElement('tr');
-  var td1 = tr.appendChild(document.createElement('td'));
-  td1.innerHTML = 1.0;
   var td2 = tr.appendChild(document.createElement('td'));
   td2.innerHTML = $("#name"+ data)[0].innerHTML;
+  var td1 = tr.appendChild(document.createElement('td'));
+  td1.innerHTML = 1.0;
+  var td3 = tr.appendChild(document.createElement('td'));
+  td3.innerHTML = $("#unit"+ data)[0].innerHTML;
 
   var table = document.getElementById("table");
 
