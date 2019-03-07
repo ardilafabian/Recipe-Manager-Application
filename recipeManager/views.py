@@ -8,9 +8,16 @@ from .models import Recipe, Ingredient, Recipe_Ingredients
 class IndexView(generic.ListView):
     template_name = 'recipeManager/index.html'
     context_object_name = 'recipes_list'
+    paginate_by = 6
 
     def get_queryset(self):
         return Recipe.objects.all()
+
+def doSearch(searchTerm, ingredients):
+    if searchTerm.isdigit():
+        return ingredients.filter(id__icontains=searchTerm)
+    else:
+        return ingredients.filter(name__icontains=searchTerm)
 
 class IngredientsView(generic.ListView):
     template_name = 'recipeManager/ingredients.html'
@@ -18,28 +25,23 @@ class IngredientsView(generic.ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        # TDOD: refactor functions
         ingredients = Ingredient.objects.all()
         if 'search' in self.request.GET:
-            searchTerm = self.request.GET['search']
-            if searchTerm.isdigit():
-                return ingredients.filter(id__icontains=searchTerm)
-            else:
-                return ingredients.filter(name__icontains=searchTerm)
+            return doSearch(self.request.GET['search'], ingredients)
         else:
             return ingredients
 
 class AddRecipeView(generic.ListView):
-    #TODO: refactor to implement the same in IngredientsView
-    print("----------------------")
-    print(generic.ListView)
-    print("----------------------")
     context_object_name = 'ingredients_list'
     template_name = 'recipeManager/addRecipe.html'
     paginate_by = 4
 
     def get_queryset(self):
-        return Ingredient.objects.all()
+        ingredients = Ingredient.objects.all()
+        if 'search' in self.request.GET:
+            return doSearch(self.request.GET['search'], ingredients)
+        else:
+            return ingredients
 
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
@@ -76,6 +78,8 @@ def RecipeDetailView(request, recipe_id):
 def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
     itChanged = False
+
+    print(request.POST)
 
     # TODO: refactor functions, delegate
     if ingredient.name != request.POST['name']: ingredient.name, itChanged = request.POST['name'], True

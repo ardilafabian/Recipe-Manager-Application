@@ -12,29 +12,6 @@
       <!-- Custom styles for this template -->
       {% load static %}
       <link href="{%static 'recipeManager/pricing.css'%}" rel="stylesheet">
-      <style media="screen">
-         /* layout.css Style */
-         .upload-drop-zone {
-         height: 200px;
-         border-width: 2px;
-         margin-bottom: 20px;
-         }
-         /* skin.css Style*/
-         .upload-drop-zone {
-         color: #ccc;
-         border-style: dashed;
-         border-color: #ccc;
-         line-height: 200px;
-         text-align: center
-         }
-         .upload-drop-zone.drop {
-         color: #222;
-         border-color: #222;
-         }
-         [draggable=true] {
-         cursor: move;
-         }
-      </style>
       <!-- Bootstrap core CSS -->
       {% load static %}
       <link href="{%static 'recipeManager/bootstrap.min.css'%}" rel="stylesheet">
@@ -63,30 +40,69 @@
                <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
                   Just drag and drop ingredients here
                </div>
+               <h4>Recipe</h4>
+               <table id="table" class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Ingredient</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="empty">
+                      <td>
+                          There not ingredients for this recipe.
+                      </td>
+                    </tr>
+                     <!--<tr>
+                        <td>quantity</td>
+                        <td>ingedint name</td>
+                        <td>ingredient cost</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td scope="row"><b>Total</b></td>
+                        <td><b> $$ </b></td>
+                     </tr>-->
+                  </tbody>
+               </table>
             </div>
             <div class="card mb-4 border-light">
-              <form class="form-inline my-lg-4" method="get">
-                <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search ingredient.." aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+                <h4>Ingredients</h4>
+                <form class="form-inline my-lg-4" method="get">
+                  <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search ingredient.." aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
                <div class="card-deck mb-3 text-center">
                   <!--<div class="card-header">
                      <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
                      </div>-->
                   {% if ingredients_list %}
                   {% for ingredient in ingredients_list %}
-                  <div id="ingredient{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
+                  <div id="{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
                      <div class="card-header">
                         <h4 class="my-0 font-weight-normal">ID: {{ ingredient.id }}</h4>
                      </div>
                      <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ ingredient.name }}</h1>
-                        <!--<a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}">
-                           <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
-                           </a>-->
+                        <h1 id="name{{ ingredient.id }}" class="card-title pricing-card-title">{{ ingredient.name }}</h1>
                      </div>
                   </div>
                   {% endfor %}
+                  {% if is_paginated %}
+                  <div class="pagination">
+                     <span class="page-links">
+                     {% if page_obj.has_previous %}
+                     <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                     {% endif %}
+                     <span class="page-current">
+                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                     </span>
+                     {% if page_obj.has_next %}
+                     <a href="?page={{ page_obj.next_page_number }}">next</a>
+                     {% endif %}
+                     </span>
+                  </div>
+                  {% endif %}
                   {% else %}
                   <p><strong>No ingredients available.</strong></p>
                   {% endif %}
