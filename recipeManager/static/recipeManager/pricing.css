@@ -38,13 +38,13 @@ html {
 /*Drag and Drop---------------------*/
 
 /* layout.css Style */
-.upload-drop-zone {
+/*.upload-drop-zone {
   height: 200px;
   border-width: 2px;
   margin-bottom: 20px;
 }
 /* skin.css Style*/
-.upload-drop-zone {
+/*.upload-drop-zone {
   color: #ccc;
   border-style: dashed;
   border-color: #ccc;
@@ -59,4 +59,4 @@ html {
 
 [draggable=true] {
   cursor: move;
-}
+}*/
