@@ -1,82 +1,77 @@
 <!DOCTYPE html>
 <!-- saved from url=(0051)https://getbootstrap.com/docs/4.3/examples/pricing/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Recipe Manager</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
-
-    <!-- Custom styles for this template -->
-    {% load static %}
-    <link href="{%static 'recipeManager/pricing.css'%}" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    {% load static %}
-    <link href="{%static 'recipeManager/bootstrap.min.css'%}" rel="stylesheet">
-  </head>
-  <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <h5 class="my-0 mr-md-auto font-weight-normal">APICBASE.COM</h5>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="{% url 'recipeManager:index' %}">Recipes</a>
-    <a class="p-2 text-dark" href="{% url 'recipeManager:ingredients' %}">Ingredients</a>
-  </nav>
-  <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
-</div>
-
-<div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+      <meta name="generator" content="Jekyll v3.8.5">
+      <title>Recipe Manager</title>
+      <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
+      <!-- Custom styles for this template -->
+      {% load static %}
+      <link href="{%static 'recipeManager/pricing.css'%}" rel="stylesheet">
+      <!-- Bootstrap core CSS -->
+      {% load static %}
+      <link href="{%static 'recipeManager/bootstrap.min.css'%}" rel="stylesheet">
+   </head>
+   <body>
+      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+         <h5 class="my-0 mr-md-auto font-weight-normal">APICBASE.COM</h5>
+         <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="{% url 'recipeManager:index' %}">Recipes</a>
+            <a class="p-2 text-dark" href="{% url 'recipeManager:ingredients' %}">Ingredients</a>
+         </nav>
+         <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
       </div>
-      <div class="card-body">
-        <!--<h1 class="card-title pricing-card-title">{{ recipe.description }}</h1>-->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Quantity</th>
-              <th scope="col">Ingredient</th>
-              <th scope="col">Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for ingredient, quantity, cost in ingredientsCosts %}
-              <tr>
-                <td>{{ quantity }} {{ ingredient.get_unit_display }}</td>
-                <td>{{ ingredient.name }}</td>
-                <td>{{ cost }}</td>
-              </tr>
-            {% endfor %}
-            <tr>
-              <td></td>
-              <td scope="row"><b>Total</b></td>
-              <td><b>{{ totalCost }}</b></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="container">
-          <div class="card-deck mb-3 text-center">
-            <div id="returnButtonSection" class="card mb-4 shadow-sm">
-              <a href="{% url 'recipeManager:index' %}" style="text-decoration:none;">
-                <button type="button" class="btn btn-lg btn-block btn-outline-warning">Return</button>
-              </a>
+      <div class="container">
+         <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+               <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
+               </div>
+               <div class="card-body">
+                  <!--<h1 class="card-title pricing-card-title">{{ recipe.description }}</h1>-->
+                  <table class="table table-hover">
+                     <thead>
+                        <tr>
+                           <th scope="col">Quantity</th>
+                           <th scope="col">Ingredient</th>
+                           <th scope="col">Cost</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for ingredient, quantity, cost in ingredientsCosts %}
+                        <tr>
+                           <td>{{ quantity }} {{ ingredient.get_unit_display }}</td>
+                           <td>{{ ingredient.name }}</td>
+                           <td>{{ cost }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                           <td></td>
+                           <td scope="row"><b>Total</b></td>
+                           <td><b>{{ totalCost }}</b></td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="container">
+                     <div class="card-deck mb-3 text-center">
+                        <div id="returnButtonSection" class="card mb-4 shadow-sm">
+                           <a href="{% url 'recipeManager:index' %}" style="text-decoration:none;">
+                           <button type="button" class="btn btn-lg btn-block btn-outline-warning">Return</button>
+                           </a>
+                        </div>
+                        <div id="editButtonSection" class="card mb-4 shadow-sm">
+                           <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-warning">Edit</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div id="editButtonSection" class="card mb-4 shadow-sm">
-              <button id="editButton" type="button" class="btn btn-lg btn-block btn-outline-warning">Edit</button>
-            </div>
-          </div>
-        </div>
+         </div>
+         <footer class="pt-4 my-md-5 pt-md-5 border-top"></footer>
       </div>
-    </div>
-  </div>
-
-  <footer class="pt-4 my-md-5 pt-md-5 border-top"></footer>
-</div>
-
-
-</body></html>
+   </body>
+</html>
