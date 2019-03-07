@@ -68,6 +68,10 @@ def calculateCosts(recipe):
 def RecipeDetailView(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     ingredientsCosts, totalCost = calculateCosts(recipe)
+    print("___________________")
+    print("RecipeDetailView")
+    print(ingredientsCosts)
+    print("___________________")
     context = {
         'recipe' : recipe,
         'ingredientsCosts' : ingredientsCosts,
@@ -76,7 +80,26 @@ def RecipeDetailView(request, recipe_id):
 
 def createRecipe(request):
     print(request.POST)
-    return HttpResponseRedirect(reverse('recipeManager:index'))
+    recipe = Recipe.objects.create(name=request.POST['name'],
+                                   description=request.POST['description'])
+    ingredients_id = request.POST.getlist('ingredient_id')
+    quantities = request.POST.getlist('quantity')
+    print("___________________")
+    print("Len of ingredient_id")
+    print(len(ingredients_id))
+    print("Len of quantities")
+    print(len(quantities))
+    print("___________________")
+    for i in range(len(ingredients_id)):
+        ingredient = Ingredient.objects.get(pk=ingredients_id[i])
+        print("___________________")
+        print("createRecipe -> for")
+        print(ingredient)
+        print("___________________")
+        relation = Recipe_Ingredients.objects.create(recipe=recipe,
+                                                     ingredient=ingredient,
+                                                     quantity=quantities[i])
+    return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
 
 def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)

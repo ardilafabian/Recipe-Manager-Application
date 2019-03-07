@@ -23,7 +23,6 @@ function drop(ev) {
   //Create and Fill ID ingredient field on recipe table
   var inputID = document.createElement('input');
   inputID.type = "text";
-  inputID.disabled = true;
   inputID.name = "ingredient_id";
   inputID.required = true;
   inputID.className = "form-control text-dark";
