@@ -12,7 +12,7 @@ function drop(ev) {
   var data = ev.dataTransfer.getData("text");
   console.log(data)
 
-  //ev.target.appendChild($("#data"));
+  $("#data").hide();
   var emptyRow = document.getElementById("empty");
   if(emptyRow){
     emptyRow.parentNode.removeChild(emptyRow);

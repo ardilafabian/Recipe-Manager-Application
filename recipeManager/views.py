@@ -34,7 +34,6 @@ class IngredientsView(generic.ListView):
 class AddRecipeView(generic.ListView):
     context_object_name = 'ingredients_list'
     template_name = 'recipeManager/addRecipe.html'
-    paginate_by = 4
 
     def get_queryset(self):
         ingredients = Ingredient.objects.all()
