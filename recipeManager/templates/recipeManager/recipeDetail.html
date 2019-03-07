@@ -47,7 +47,7 @@
           <tbody>
             {% for ingredient in ingredients %}
               <tr>
-                <td>{{ ingredient.amount }} {{ ingredient.unit }}</td>
+                <td>{{ ingredient.amount }} {{ ingredient.get_unit_display }}</td>
                 <td>{{ ingredient.name }}</td>
                 <td>{{ ingredient.cost }}</td>
               </tr>

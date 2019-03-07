@@ -6,15 +6,15 @@ class Ingredient(models.Model):
     cost = models.FloatField()
     amount = models.FloatField()
     #-Unit Choices----
-    GRAMS='g'
-    KILOGRAMS='Kg'
-    CENTILITER='cl'
-    LITER='l'
+    GRAMS='g.'
+    KILOGRAMS='Kg.'
+    CENTILITERS='cl.'
+    LITERS='l.'
     UNIT_CHOICES = (
         (GRAMS, 'Grams'),
-        (KILOGRAMS, 'Kilograms'),
-        (CENTILITER, 'Centiliter'),
-        (LITER, 'Liter')
+        (KILOGRAMS, 'Kilogram'),
+        (CENTILITERS, 'Centiliter'),
+        (LITERS, 'Liter')
     )
     #------------------
     unit = models.CharField(
@@ -39,5 +39,3 @@ class Recipe_Ingredients(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.FloatField()
-
-    
