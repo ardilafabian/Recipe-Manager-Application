@@ -17,6 +17,7 @@ class IngredientsView(generic.ListView):
     context_object_name = 'ingredients_list'
 
     def get_queryset(self):
+        # TDOD: refactor functions
         ingredients = Ingredient.objects.all()
         if 'search' in self.request.GET:
             searchTerm = self.request.GET['search']
@@ -30,6 +31,12 @@ class IngredientsView(generic.ListView):
 class RecipeDetailView(generic.DetailView):
     model = Recipe
     template_name = 'recipeManager/recipeDetail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recipe = context['recipe']
+        context['ingredients'] = Ingredient.objects.filter(recipe__id=recipe.id)
+        return context
 
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
@@ -47,6 +54,7 @@ def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
     itChanged = False
 
+    # TODO: refactor functions, delegate
     if ingredient.name != request.POST['name']: ingredient.name, itChanged = request.POST['name'], True
     if ingredient.cost != request.POST['cost']: ingredient.cost, itChanged = request.POST['cost'], True
     if ingredient.amount != request.POST['amount']: ingredient.amount, itChanged = request.POST['amount'], True
