@@ -74,6 +74,10 @@ def RecipeDetailView(request, recipe_id):
         'totalCost' : totalCost}
     return render(request, "recipeManager/recipeDetail.html", context)
 
+def createRecipe(request):
+    print(request.POST)
+    return HttpResponseRedirect(reverse('recipeManager:index'))
+
 def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
     itChanged = False
