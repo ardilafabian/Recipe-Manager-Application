@@ -50,43 +50,44 @@
          </nav>
          <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
       </div>
+
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Add recipe</h1>
+        <!--<p class="lead">Manage your recipes and ingredients in an easy way.</p>-->
+      </div>
+
       <div class="container">
-        <div class="card-deck mb-3 text-center">
-          <div class="card mb-4 shadow-sm">
-            <h4>Or drag and drop files below</h4>
-            <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
-               Just drag and drop files here
-            </div>
-            </div>
-
-
+         <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
-              <div class="card-deck mb-3 text-center">
-                <!--<div class="card-header">
-                   <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
-                   </div>-->
-                {% if ingredients_list %}
+               <h4>Or drag and drop files below</h4>
+               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
+                  Just drag and drop files here
+               </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+               <div class="card-deck mb-3 text-center">
+                  <!--<div class="card-header">
+                     <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
+                     </div>-->
+                  {% if ingredients_list %}
                   {% for ingredient in ingredients_list %}
-                    <div id="ingredient{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
-                       <div class="card-header">
-                          <h4 class="my-0 font-weight-normal">ID: {{ ingredient.id }}</h4>
-                       </div>
-                       <div class="card-body">
-                          <h1 class="card-title pricing-card-title">{{ ingredient.name }}</h1>
-                          <!--<a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}">
-                             <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
-                             </a>-->
-                       </div>
-                    </div>
+                  <div id="ingredient{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
+                     <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">ID: {{ ingredient.id }}</h4>
+                     </div>
+                     <div class="card-body">
+                        <h1 class="card-title pricing-card-title">{{ ingredient.name }}</h1>
+                        <!--<a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}">
+                           <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
+                           </a>-->
+                     </div>
+                  </div>
                   {% endfor %}
-                {% else %}
-                <p><strong>No ingredients available.</strong></p>
-                {% endif %}
-                </div>
-
-              </div>
-
-
+                  {% else %}
+                  <p><strong>No ingredients available.</strong></p>
+                  {% endif %}
+               </div>
+            </div>
          </div>
          <footer class="pt-4 my-md-5 pt-md-5 border-top"></footer>
       </div>
