@@ -11,7 +11,7 @@ class Ingredient(models.Model):
     CENTILITERS='cl.'
     LITERS='l.'
     UNIT_CHOICES = (
-        (GRAMS, 'Grams'),
+        (GRAMS, 'Gram'),
         (KILOGRAMS, 'Kilogram'),
         (CENTILITERS, 'Centiliter'),
         (LITERS, 'Liter')
@@ -39,3 +39,7 @@ class Recipe_Ingredients(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.FloatField()
+
+    def __str__(self):
+        r = "{" + str(self.recipe.id)+"|"+self.recipe.name+","+str(self.ingredient.id)+"|"+self.ingredient.name+", quantity:"+str(self.quantity) +"}"
+        return r

@@ -45,13 +45,18 @@
             </tr>
           </thead>
           <tbody>
-            {% for ingredient in ingredients %}
+            {% for ingredient, quantity, cost in ingredientsCosts %}
               <tr>
-                <td>{{ ingredient.amount }} {{ ingredient.get_unit_display }}</td>
+                <td>{{ quantity }} {{ ingredient.get_unit_display }}</td>
                 <td>{{ ingredient.name }}</td>
-                <td>{{ ingredient.cost }}</td>
+                <td>{{ cost }}</td>
               </tr>
             {% endfor %}
+            <tr>
+              <td></td>
+              <td scope="row">Total</td>
+              <td>{{ totalCost }}</td>
+            </tr>
           </tbody>
         </table>
         <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
