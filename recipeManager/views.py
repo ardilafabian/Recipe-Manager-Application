@@ -8,7 +8,7 @@ from .models import Recipe, Ingredient, Recipe_Ingredients
 class IndexView(generic.ListView):
     template_name = 'recipeManager/index.html'
     context_object_name = 'recipes_list'
-    paginate_by = 6
+    paginate_by = 8
 
     def get_queryset(self):
         return Recipe.objects.all()

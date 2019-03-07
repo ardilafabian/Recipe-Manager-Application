@@ -10,7 +10,7 @@ function drag(ev) {
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
-  console.log(data)
+  console.log(data);
 
   //Remove message of empty ingredients
   var emptyRow = document.getElementById("empty");
@@ -23,6 +23,7 @@ function drop(ev) {
   //Create and Fill ID ingredient field on recipe table
   var inputID = document.createElement('input');
   inputID.type = "text";
+  inputID.id = "ingredient_id"+data
   inputID.name = "ingredient_id";
   inputID.required = true;
   inputID.className = "form-control text-dark";
@@ -32,7 +33,7 @@ function drop(ev) {
 
   //Fill name field on recipe table
   var td2 = tr.appendChild(document.createElement('td'));
-  td2.innerHTML = $("#name"+ data)[0].innerHTML;
+  td2.innerHTML = $("#ingredientName"+ data)[0].innerHTML;
 
   //Create and Fill quantity field on recipe table
   var input = document.createElement('input');
@@ -45,11 +46,13 @@ function drop(ev) {
   var td1 = tr.appendChild(document.createElement('td'));
   td1.appendChild(input);
 
-  //Fill quantity field on recipe table
+  //Fill units field on recipe table
   var td3 = tr.appendChild(document.createElement('td'));
-  td3.innerHTML = $("#unit"+ data)[0].innerHTML;
+  td3.innerHTML = $("#ingredientUnit"+ data)[0].innerHTML;
 
   var table = document.getElementById("table");
 
   table.appendChild(tr);
+  $("#ingredient_id"+data).attr('readonly', true);
+  $("#"+data).hide();
 }
