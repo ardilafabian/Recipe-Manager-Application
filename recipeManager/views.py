@@ -46,7 +46,7 @@ def calculateCosts(recipe):
     ingredientsCosts = []
     for ingredient in ingredients:
         quant = Recipe_Ingredients.objects.get(recipe__id = recipe.id, ingredient__id = ingredient.id).quantity
-        costPerQuantity = (ingredient.cost / ingredient.amount) * quant
+        costPerQuantity = round((ingredient.cost / ingredient.amount) * quant, 2)
         totalCost += costPerQuantity
         ingredientsCosts.append((ingredient, quant, costPerQuantity))
     return ingredientsCosts, totalCost
