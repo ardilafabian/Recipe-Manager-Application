@@ -27,32 +27,30 @@
          </nav>
          <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
       </div>
-
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Add recipe</h1>
+         <h1 class="display-4">Add recipe</h1>
       </div>
-
       <div class="container">
          <div class="card-deck mb-3 text-center">
             <div class="card mb-4 border-light">
                <!--<h4>Drag and drop ingredients below</h4>
-               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
-                  Just drag and drop ingredients here
-               </div>-->
+                  <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
+                     Just drag and drop ingredients here
+                  </div>-->
                <h4>Recipe</h4>
                <ul class="list-unstyled mt-3 mb-4">
-                 <li>
-                    <div class="input-group mb-3">
-                       <label class="input-group-text" for="id_name"><b>Name:</b></label>
-                       <input id="id_name" class="form-control text-dark" type="text" required name="name">
-                    </div>
-                 </li>
-                 <li>
-                    <div class="input-group mb-3">
-                       <label class="input-group-text" for="id_description"><b>Description:</b></label>
-                       <input id="id_description" class="form-control text-dark" type="text" required name="name">
-                    </div>
-                 </li>
+                  <li>
+                     <div class="input-group mb-3">
+                        <label class="input-group-text" for="id_name"><b>Name:</b></label>
+                        <input id="id_name" class="form-control text-dark" type="text" required name="name">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="input-group mb-3">
+                        <label class="input-group-text" for="id_description"><b>Description:</b></label>
+                        <input id="id_description" class="form-control text-dark" type="text" required name="name">
+                     </div>
+                  </li>
                </ul>
                <p class="lead">Just drag and drop ingredients on the recipe below.</p>
                <table style="border-style: dashed;" id="table" class="table table-hover" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -64,20 +62,20 @@
                      </tr>
                   </thead>
                   <tbody>
-                    <tr id="empty">
-                      <td></td>
-                      <td>
-                          There are no ingredients for this recipe.
-                      </td>
-                      <td></td>
-                    </tr>
+                     <tr id="empty">
+                        <td></td>
+                        <td>
+                           There are no ingredients for this recipe.
+                        </td>
+                        <td></td>
+                     </tr>
                   </tbody>
                </table>
                <div class="container">
                   <div class="card-deck mb-3 text-center">
                      <div id="cancelButtonSection" class="card mb-4 shadow-sm">
                         <a href="{% url 'recipeManager:index' %}" style="text-decoration:none;">
-                          <button type="button" class="btn btn-lg btn-block btn-outline-danger">Cancel</button>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-danger">Cancel</button>
                         </a>
                      </div>
                      <div id="saveButtonSection" class="card mb-4 shadow-sm">
@@ -87,7 +85,7 @@
                </div>
             </div>
             <div class="card mb-4 border-light">
-                <h4>Ingredients</h4>
+               <h4>Ingredients</h4>
                <div class="card-deck mb-3 text-center">
                   <!--<div class="card-header">
                      <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
