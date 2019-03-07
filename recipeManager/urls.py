@@ -5,6 +5,7 @@ from django.urls import reverse
 app_name = 'recipeManager'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('add/', views.AddRecipeView.as_view(), name='addRecipe'),
     path('ingredients/', views.IngredientsView.as_view(), name='ingredients'),
     path('<int:recipe_id>/', views.RecipeDetailView, name='recipeDetail'),
     path('ingredient/<int:pk>/', views.IngredientDetailView.as_view(), name='ingredientDetail'),

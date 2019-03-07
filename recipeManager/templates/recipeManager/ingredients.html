@@ -51,10 +51,9 @@
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>
-            <!--<ul class="list-unstyled mt-3 mb-4">
-              <li>{{ ingredient.description }}</li>
-            </ul>-->
-            <a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}"><button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button></a>
+            <a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}">
+              <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
+            </a>
           </div>
         </div>
       {% endfor %}
@@ -63,42 +62,7 @@
     {% endif %}
   </div>
 
-  <footer class="pt-4 my-md-5 pt-md-5 border-top">
-  <!--  <div class="row">
-      <div class="col-12 col-md">
-        <small class="d-block mb-3 text-muted">© 2017-2019</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Cool stuff</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Random feature</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Team feature</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Stuff for developers</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Another one</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Last time</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Resource</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Resource name</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Another resource</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Final resource</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Team</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Locations</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Privacy</a></li>
-          <li><a class="text-muted" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Terms</a></li>
-        </ul>
-      </div>
-    </div> -->
-  </footer>
+  <footer class="pt-4 my-md-5 pt-md-5 border-top"></footer>
 </div>
 
 
