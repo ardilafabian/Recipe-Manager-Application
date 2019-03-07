@@ -13,11 +13,13 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Recipe.objects.all()
 
+
 def doSearch(searchTerm, ingredients):
     if searchTerm.isdigit():
         return ingredients.filter(id__icontains=searchTerm)
     else:
         return ingredients.filter(name__icontains=searchTerm)
+
 
 class IngredientsView(generic.ListView):
     template_name = 'recipeManager/ingredients.html'
@@ -31,6 +33,7 @@ class IngredientsView(generic.ListView):
         else:
             return ingredients
 
+
 class AddRecipeView(generic.ListView):
     context_object_name = 'ingredients_list'
     template_name = 'recipeManager/addRecipe.html'
@@ -42,9 +45,11 @@ class AddRecipeView(generic.ListView):
         else:
             return ingredients
 
+
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
     template_name = 'recipeManager/ingredientDetail.html'
+
 
 class AddIngredientView(generic.CreateView):
     model = Ingredient
@@ -53,6 +58,7 @@ class AddIngredientView(generic.CreateView):
 
     def get_success_url(self):
         return reverse('recipeManager:ingredientDetail', args=(self.object.id,))
+
 
 def calculateCosts(recipe):
     ingredients = Ingredient.objects.filter(recipe__id=recipe.id)
@@ -64,6 +70,7 @@ def calculateCosts(recipe):
         totalCost += costPerQuantity
         ingredientsCosts.append((ingredient, quant, costPerQuantity))
     return ingredientsCosts, totalCost
+
 
 def RecipeDetailView(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
@@ -77,6 +84,7 @@ def RecipeDetailView(request, recipe_id):
         'ingredientsCosts' : ingredientsCosts,
         'totalCost' : totalCost}
     return render(request, "recipeManager/recipeDetail.html", context)
+
 
 def createRecipe(request):
     print(request.POST)
@@ -101,6 +109,7 @@ def createRecipe(request):
                                                      quantity=quantities[i])
     return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
 
+
 def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
     itChanged = False
@@ -117,3 +126,4 @@ def updateIngredient(request, ingredient_id):
         ingredient.save()
 
     return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))
+    
