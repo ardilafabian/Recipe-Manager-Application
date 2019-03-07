@@ -58,13 +58,17 @@
 
       <div class="container">
          <div class="card-deck mb-3 text-center">
-            <div class="card mb-4 shadow-sm">
-               <h4>Or drag and drop files below</h4>
+            <div class="card mb-4 border-light">
+               <h4>Drag and drop ingredients below</h4>
                <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
-                  Just drag and drop files here
+                  Just drag and drop ingredients here
                </div>
             </div>
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-4 border-light">
+              <form class="form-inline my-lg-4" method="get">
+                <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search ingredient.." aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
                <div class="card-deck mb-3 text-center">
                   <!--<div class="card-header">
                      <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>

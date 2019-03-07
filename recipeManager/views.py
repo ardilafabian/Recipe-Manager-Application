@@ -15,8 +15,7 @@ class IndexView(generic.ListView):
 class IngredientsView(generic.ListView):
     template_name = 'recipeManager/ingredients.html'
     context_object_name = 'ingredients_list'
-    #TODO: fix pgination to show in frontend number on pages
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         # TDOD: refactor functions
@@ -37,6 +36,7 @@ class AddRecipeView(generic.ListView):
     print("----------------------")
     context_object_name = 'ingredients_list'
     template_name = 'recipeManager/addRecipe.html'
+    paginate_by = 4
 
     def get_queryset(self):
         return Ingredient.objects.all()
