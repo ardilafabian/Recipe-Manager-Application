@@ -11,6 +11,12 @@ function drag(ev) {
 	ev.dataTransfer.setData("text", ev.target.id);
 }
 
+function remove(id) {
+  $("#" + id).show();
+  var ingredient = document.getElementById("rowID"+id);
+  ingredient.parentNode.removeChild(ingredient);
+}
+
 function drop(ev) {
 	ev.preventDefault();
 	var data = ev.dataTransfer.getData("text");

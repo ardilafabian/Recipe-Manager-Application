@@ -45,6 +45,19 @@ class AddRecipeView(generic.ListView):
         else:
             return ingredients
 
+def createRecipe(request):
+    #print(request.POST)
+    recipe = Recipe.objects.create(name=request.POST['name'],
+                                   description=request.POST['description'])
+    ingredients_id = request.POST.getlist('ingredient_id')
+    quantities = request.POST.getlist('quantity')
+    for i in range(len(ingredients_id)):
+        ingredient = Ingredient.objects.get(pk=ingredients_id[i])
+        relation = Recipe_Ingredients.objects.create(recipe=recipe,
+                                                     ingredient=ingredient,
+                                                     quantity=quantities[i])
+    return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
+
 
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
@@ -75,46 +88,27 @@ def calculateCosts(recipe):
 def RecipeDetailView(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     ingredientsCosts, totalCost = calculateCosts(recipe)
-    print("___________________")
-    print("RecipeDetailView")
-    print(ingredientsCosts)
-    print("___________________")
     context = {
         'recipe' : recipe,
         'ingredientsCosts' : ingredientsCosts,
         'totalCost' : totalCost}
     return render(request, "recipeManager/recipeDetail.html", context)
 
+def EditRecipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    context = {'recipe' : recipe}
 
-def createRecipe(request):
-    print(request.POST)
-    recipe = Recipe.objects.create(name=request.POST['name'],
-                                   description=request.POST['description'])
-    ingredients_id = request.POST.getlist('ingredient_id')
-    quantities = request.POST.getlist('quantity')
-    print("___________________")
-    print("Len of ingredient_id")
-    print(len(ingredients_id))
-    print("Len of quantities")
-    print(len(quantities))
-    print("___________________")
-    for i in range(len(ingredients_id)):
-        ingredient = Ingredient.objects.get(pk=ingredients_id[i])
-        print("___________________")
-        print("createRecipe -> for")
-        print(ingredient)
-        print("___________________")
-        relation = Recipe_Ingredients.objects.create(recipe=recipe,
-                                                     ingredient=ingredient,
-                                                     quantity=quantities[i])
-    return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
+    recipe_ingredients = Ingredient.objects.filter(recipe__id=recipe.id)
+    if len(recipe_ingredients) > 0 : context['recipe_ingredients'] = recipe_ingredients
+    ingredients_list = Ingredient.objects.all()
+    if len(ingredients_list) > 0 : context['ingredients_list'] = ingredients_list
+
+    return render(request, "recipeManager/editRecipe.html", context)
 
 
 def updateIngredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
     itChanged = False
-
-    print(request.POST)
 
     # TODO: refactor functions, delegate
     if ingredient.name != request.POST['name']: ingredient.name, itChanged = request.POST['name'], True
@@ -126,4 +120,3 @@ def updateIngredient(request, ingredient_id):
         ingredient.save()
 
     return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))
-    
