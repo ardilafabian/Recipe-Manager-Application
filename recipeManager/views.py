@@ -63,7 +63,10 @@ def AddRecipeView(request):
                                              ingredient=ingredient,
                                              quantity=quantities[i])
         return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
-
+    print("-----------------------------------")
+    print("Tamaño de la lista")
+    print(len(ingredients_list))
+    print("-----------------------------------")
     context = {
         'ingredients_list' : ingredients_list,
         }
@@ -81,6 +84,11 @@ class AddIngredientView(generic.CreateView):
     model = Ingredient
     template_name = 'recipeManager/addIngredient.html'
     fields = ['name', 'cost', 'amount', 'unit']
+#    list = Ingredient.UNIT_CHOICES
+
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        context['list'] = list
 
     def get_success_url(self):
         return reverse('recipeManager:ingredientDetail', args=(self.object.id,))
@@ -168,6 +176,11 @@ def EditRecipe(request, recipe_id):
 
     ingredientsCosts, totalCost = calculateCosts(recipe)
     context['ingredientsCosts'] = ingredientsCosts
+
+    print("-----------------------------------")
+    print("Tamaño de la lista")
+    print(len(ingredients_list))
+    print("-----------------------------------")
 
     return render(request, "recipeManager/editRecipe.html", context)
 
