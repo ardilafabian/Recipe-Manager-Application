@@ -120,7 +120,7 @@ def validateIngredientsChange(oldIngredients, newIngredients):
     a = []
     for ingr in oldIngredients:
         a.append(ingr.id)
-    b = newIngredients
+    b = newIngredients.copy()
     a.sort()
     b.sort()
     return a == b
@@ -134,7 +134,7 @@ def validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities):
         oldQuantities.append(Recipe_Ingredients.objects.get(recipe__id=recipe.id,
                                                 ingredient__id=ingredient.id).quant)
     self.assert_(len(oldQuantities) == len(newQuantities), 'Internal error at: validateQuantitiesChange')
-    a, b = oldQuantities, newQuantities
+    a, b = oldQuantities, newQuantities.copy()
     a.sort()
     b.sort()
     return a == b
