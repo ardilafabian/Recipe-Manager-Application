@@ -89,7 +89,7 @@
             </div>
             <div class="card mb-4 border-light">
                <h4>Ingredients</h4>
-               <div class="card-deck mb-3 text-center">
+               <div class="card-deck mb-3 text-center" data-spy="scroll" style="position: relative;max-height:500px;overflow-y: scroll;">
                   {% if ingredients_list %}
                     {% for ingredient in ingredients_list %}
                     <div id="{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
