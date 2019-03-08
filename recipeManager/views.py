@@ -8,17 +8,29 @@ from .models import Recipe, Ingredient, Recipe_Ingredients
 
 #----------------------------------------------------------------------------------------------------
 
-def doSearch(searchTerm, model_name):
-    if model_name == "Ingredient":
-        if searchTerm.isdigit():
-            return Ingredient.objects.filter(id__icontains=searchTerm)
-        else:
-            return Ingredient.objects.filter(name__icontains=searchTerm)
-    elif model_name == "Recipe":
-        if searchTerm.isdigit():
-            return Recipe.objects.filter(id__icontains=searchTerm)
-        else:
-            return Recipe.objects.filter(name__icontains=searchTerm)
+def lev(a, b):
+    if not a: return len(b)
+    if not b: return len(a)
+    return min(lev(a[1:], b[1:])+(a[0] != b[0]), lev(a[1:], b)+1, lev(a, b[1:])+1)
+
+#----------------------------------------------------------------------------------------------------
+
+def finOptions(searchTerm, list):
+    results = []
+    for i in list:
+        result.append(lev(searchTerm, i.name))
+    #PROBLEM: how tu save info to return more similar results
+
+#----------------------------------------------------------------------------------------------------
+
+def doSearch(searchTerm, list):
+    if searchTerm.isdigit():
+        result = list.filter(id__icontains=searchTerm)
+    else:
+        result = list.filter(name__icontains=searchTerm)
+#    if len(result) == 0:
+#        result = finOptions(searchTerm, list)
+    return result
 
 #----------------------------------------------------------------------------------------------------
 
@@ -30,7 +42,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         recipes = Recipe.objects.all()
         if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], "Recipe")
+            return doSearch(self.request.GET['search'], recipes)
         else:
             return recipes
 
@@ -44,7 +56,7 @@ class IngredientsView(generic.ListView):
     def get_queryset(self):
         ingredients = Ingredient.objects.all()
         if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], "Ingredient")
+            return doSearch(self.request.GET['search'], ingredients)
         else:
             return ingredients
 
