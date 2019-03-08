@@ -67,15 +67,14 @@
                   </thead>
                   <tbody>
                     {% if recipe_ingredients %}
-                      {% for ingredient in recipe_ingredients %}
+                      {% for ingredient, quantity, cost in ingredientsCosts %}
                         <tr id="rowID{{ ingredient.id }}">
                           <td>
                             <input id="ingredient_id{{ ingredient.id }}" type="text" class="form-control text-dark" name="ingredient_id" required readonly="readonly" value="{{ ingredient.id }}">
                           </td>
                           <td>{{ ingredient.name }}</td>
                           <td>
-                            <!-- TODO: left quantity -->
-                            <input type="number" step="0.01" name="quantity" required class="form-control text-dark" value="">
+                            <input type="number" step="0.01" name="quantity" required class="form-control text-dark" value="{{ quantity }}">
                           </td>
                           <td>{{ ingredient.get_unit_display }}</td>
                           <td>
@@ -113,9 +112,6 @@
             <div class="card mb-4 border-light">
                <h4>Ingredients</h4>
                <div class="card-deck mb-3 text-center">
-                  <!--<div class="card-header">
-                     <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
-                     </div>-->
                   {% if ingredients_list %}
                     {% for ingredient in ingredients_list %}
                       {% if recipe_ingredients %}
