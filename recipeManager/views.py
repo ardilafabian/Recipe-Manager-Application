@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 
 from .models import Recipe, Ingredient, Recipe_Ingredients
 
@@ -62,11 +63,8 @@ def AddRecipeView(request):
             Recipe_Ingredients.objects.create(recipe=recipe,
                                              ingredient=ingredient,
                                              quantity=quantities[i])
+        messages.success(request, 'Recipe created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
         return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
-    print("-----------------------------------")
-    print("Tamaño de la lista")
-    print(len(ingredients_list))
-    print("-----------------------------------")
     context = {
         'ingredients_list' : ingredients_list,
         }
@@ -83,7 +81,11 @@ class IngredientDetailView(generic.DetailView):
 def AddIngredientView(request):
     choices_list = Ingredient.UNIT_CHOICES
     if request.method == "POST":
-        ingredient = Ingredient.objects.create(name=request.POST['name'],cost=request.POST['cost'],amount=request.POST['amount'],unit=request.POST['unit'])
+        ingredient = Ingredient.objects.create(name=request.POST['name'],
+                                               cost=request.POST['cost'],
+                                               amount=request.POST['amount'],
+                                               unit=request.POST['unit'])
+        messages.success(request, 'Ingredient created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
         return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))
     context = {'choices_list' : choices_list}
     return render(request, "recipeManager/addIngredient.html", context)
@@ -161,6 +163,7 @@ def EditRecipe(request, recipe_id):
         newQuantities = request.POST.getlist('quantity')
         if not(validateIngredientsChange(recipe_ingredients, recipe_ingredients_id)) or not(validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities)):
             makeIngredientsChange(recipe, recipe_ingredients_id, newQuantities)
+        messages.success(request, 'Recipe edited successfully.', extra_tags='alert alert-success alert-dismissible fade show')
         return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
 
     context = {'recipe' : recipe}
@@ -186,6 +189,7 @@ def updateIngredient(request, ingredient_id):
     if ingredient.unit != request.POST['unit']: ingredient.unit, itChanged = request.POST['unit'], True
 
     if itChanged:
+        messages.success(request, 'Ingredient updated successfully.', extra_tags='alert alert-success alert-dismissible fade show')
         ingredient.save()
 
     return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))

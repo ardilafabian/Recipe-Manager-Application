@@ -33,6 +33,13 @@
          <!--<p class="lead">Manage your recipes and ingredients in an easy way.</p>-->
       </div>
       <div class="container">
+        {% if messages %}
+          <ul class="messages list-unstyled">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
          <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
                <form action="{% url 'recipeManager:updateIngredient' ingredient.id %}" method="post">

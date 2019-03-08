@@ -26,6 +26,13 @@
          <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
       </div>
       <div class="container">
+        {% if messages %}
+          <ul class="messages list-unstyled">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
          <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
                <div class="card-header">
