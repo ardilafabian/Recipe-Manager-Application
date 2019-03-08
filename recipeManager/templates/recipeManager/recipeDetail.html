@@ -53,13 +53,13 @@
                         <tr>
                            <td>{{ quantity }} {{ ingredient.get_unit_display }}</td>
                            <td>{{ ingredient.name }}</td>
-                           <td>{{ cost }}</td>
+                           <td>€ {{ cost }}</td>
                         </tr>
                         {% endfor %}
                         <tr>
                            <td></td>
                            <td scope="row"><b>Total</b></td>
-                           <td><b>{{ totalCost }}</b></td>
+                           <td><b> €{{ totalCost }}</b></td>
                         </tr>
                      </tbody>
                   </table>

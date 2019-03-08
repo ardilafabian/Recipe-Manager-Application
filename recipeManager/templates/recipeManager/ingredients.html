@@ -42,7 +42,7 @@
                   <h4 class="my-0 font-weight-normal"><small class="text-muted">(ID: {{ ingredient.id }})</small> {{ ingredient.name }}</h4>
                </div>
                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>
+                  <h1 class="card-title pricing-card-title">€{{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }} {{ ingredient.unit }}</small></h1>
                   <a class="alert-link" style="text-decoration:none;" href="{% url 'recipeManager:ingredientDetail' ingredient.id %}">
                   <button type="button" class="btn btn-lg btn-block btn-outline-warning">View</button>
                   </a>
