@@ -30,6 +30,10 @@
          <p class="lead">The easiest way to manage your recipes.</p>
       </div>
       <div class="container">
+        <form class="form-inline my-lg-4" method="get">
+           <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search ingredient.." aria-label="Search">
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
          <div class="card-deck mb-3 text-center">
             {% if recipes_list %}
             {% for recipe in recipes_list %}
@@ -49,22 +53,22 @@
 
          </div>
          {% if is_paginated %}
-         <div class="pagination">
-            <span class="page-links">
-            {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-            <span class="page-current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            {% endif %}
-            </span>
-         </div>
+           <div class="pagination">
+              <span class="page-links">
+              {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+              <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+              {% endif %}
+              </span>
+           </div>
          {% endif %}
          {% else %}
-         <p><strong>No recipes available.</strong></p>
+          <p><strong>No recipes available.</strong></p>
          {% endif %}
          <footer class="pt-4 my-md-5 pt-md-5 border-top"></footer>
       </div>

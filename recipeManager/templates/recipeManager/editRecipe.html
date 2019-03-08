@@ -35,10 +35,6 @@
             <div class="card mb-4 border-light">
               <form action="{% url 'recipeManager:editRecipe' recipe.id %}" method="post">
                  {% csrf_token %}
-               <!--<h4>Drag and drop ingredients below</h4>
-                  <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
-                     Just drag and drop ingredients here
-                  </div>-->
                <h4>Recipe</h4>
                <ul class="list-unstyled mt-3 mb-4">
                   <li>

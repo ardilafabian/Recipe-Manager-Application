@@ -35,10 +35,6 @@
             <div class="card mb-4 border-light">
               <form action="{% url 'recipeManager:addRecipe' %}" method="post">
                  {% csrf_token %}
-               <!--<h4>Drag and drop ingredients below</h4>
-                  <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
-                     Just drag and drop ingredients here
-                  </div>-->
                <h4>Recipe</h4>
                <ul class="list-unstyled mt-3 mb-4">
                   <li>
@@ -94,26 +90,23 @@
             <div class="card mb-4 border-light">
                <h4>Ingredients</h4>
                <div class="card-deck mb-3 text-center">
-                  <!--<div class="card-header">
-                     <h4 class="my-0 font-weight-normal">{{ recipe.name }}</h4>
-                     </div>-->
                   {% if ingredients_list %}
-                  {% for ingredient in ingredients_list %}
-                  <div id="{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
-                     <div class="card-header">
-                        <h4 id="igredientId{{ ingredient.id }}" class="my-0 font-weight-normal">ID: {{ ingredient.id }}</h4>
-                     </div>
-                     <div class="card-body">
-                        <h1 id="ingredientName{{ ingredient.id }}" class="card-title pricing-card-title">{{ ingredient.name }}</h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                           <li>${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }}</small></li>
-                           <li id="ingredientUnit{{ ingredient.id }}">{{ ingredient.get_unit_display }}</li>
-                        </ul>
-                     </div>
-                  </div>
-                  {% endfor %}
+                    {% for ingredient in ingredients_list %}
+                    <div id="{{ ingredient.id }}" draggable="true" ondragstart="drag(event)" class="card mb-4 shadow-sm">
+                       <div class="card-header">
+                          <h4 id="igredientId{{ ingredient.id }}" class="my-0 font-weight-normal">ID: {{ ingredient.id }}</h4>
+                       </div>
+                       <div class="card-body">
+                          <h1 id="ingredientName{{ ingredient.id }}" class="card-title pricing-card-title">{{ ingredient.name }}</h1>
+                          <ul class="list-unstyled mt-3 mb-4">
+                             <li>${{ ingredient.cost }} <small class="text-muted">/ {{ ingredient.amount }}</small></li>
+                             <li id="ingredientUnit{{ ingredient.id }}">{{ ingredient.get_unit_display }}</li>
+                          </ul>
+                       </div>
+                    </div>
+                    {% endfor %}
                   {% else %}
-                  <p><strong>No ingredients available.</strong></p>
+                    <p><strong>No ingredients available.</strong></p>
                   {% endif %}
                </div>
             </div>

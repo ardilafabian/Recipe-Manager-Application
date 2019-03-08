@@ -7,21 +7,31 @@ from .models import Recipe, Ingredient, Recipe_Ingredients
 
 #----------------------------------------------------------------------------------------------------
 
+def doSearch(searchTerm, model_name):
+    if model_name == "Ingredient":
+        if searchTerm.isdigit():
+            return Ingredient.objects.filter(id__icontains=searchTerm)
+        else:
+            return Ingredient.objects.filter(name__icontains=searchTerm)
+    elif model_name == "Recipe":
+        if searchTerm.isdigit():
+            return Recipe.objects.filter(id__icontains=searchTerm)
+        else:
+            return Recipe.objects.filter(name__icontains=searchTerm)
+
+#----------------------------------------------------------------------------------------------------
+
 class IndexView(generic.ListView):
     template_name = 'recipeManager/index.html'
     context_object_name = 'recipes_list'
     paginate_by = 8
 
     def get_queryset(self):
-        return Recipe.objects.all()
-
-#----------------------------------------------------------------------------------------------------
-
-def doSearch(searchTerm, ingredients):
-    if searchTerm.isdigit():
-        return ingredients.filter(id__icontains=searchTerm)
-    else:
-        return ingredients.filter(name__icontains=searchTerm)
+        recipes = Recipe.objects.all()
+        if 'search' in self.request.GET:
+            return doSearch(self.request.GET['search'], "Recipe")
+        else:
+            return recipes
 
 #----------------------------------------------------------------------------------------------------
 
@@ -33,7 +43,7 @@ class IngredientsView(generic.ListView):
     def get_queryset(self):
         ingredients = Ingredient.objects.all()
         if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], ingredients)
+            return doSearch(self.request.GET['search'], "Ingredient")
         else:
             return ingredients
 
