@@ -28,7 +28,7 @@
          <!--<a class="btn btn-outline-warning" href="https://getbootstrap.com/docs/4.3/examples/pricing/#">Add Recipe</a>-->
       </div>
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-         <h1 class="display-4">Add recipe</h1>
+         <h1 class="display-4">Edit recipe</h1>
       </div>
       <div class="container">
          <div class="card-deck mb-3 text-center">
@@ -107,7 +107,7 @@
             </div>
             <div class="card mb-4 border-light">
                <h4>Ingredients</h4>
-               <div class="card-deck mb-3 text-center data-spy="scroll" style="position: relative;max-height:500px;overflow-y: scroll;">
+               <div class="card-deck mb-3 text-center" data-spy="scroll" style="position: relative;max-height:500px;overflow-y: scroll;">
                   {% if ingredients_list %}
                     {% for ingredient in ingredients_list %}
                       {% if recipe_ingredients %}

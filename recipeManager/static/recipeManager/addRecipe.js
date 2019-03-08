@@ -12,7 +12,11 @@ function drag(ev) {
 }
 
 function remove(id) {
+  console.log("try remove ingredient");
+  console.log(id);
   $("#" + id).show();
+  elemnt = document.getElementById(id);
+  elemnt.hidden = false;
   var ingredient = document.getElementById("rowID"+id);
   ingredient.parentNode.removeChild(ingredient);
 }
