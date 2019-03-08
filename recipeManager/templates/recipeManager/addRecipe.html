@@ -33,7 +33,7 @@
       <div class="container">
          <div class="card-deck mb-3 text-center">
             <div class="card mb-4 border-light">
-              <form action="{% url 'recipeManager:createRecipe' %}" method="post">
+              <form action="{% url 'recipeManager:addRecipe' %}" method="post">
                  {% csrf_token %}
                <!--<h4>Drag and drop ingredients below</h4>
                   <div ondrop="drop(event)" ondragover="allowDrop(event)" class="upload-drop-zone" id="drop-zone">
@@ -85,7 +85,7 @@
                         </a>
                      </div>
                      <div id="saveButtonSection" class="card mb-4 shadow-sm">
-                        <button id="saveButton" class="btn btn-lg btn-block btn-outline-success">Add</button>
+                        <button id="saveButton" type="submit" class="btn btn-lg btn-block btn-outline-success">Add</button>
                      </div>
                   </div>
                </div>

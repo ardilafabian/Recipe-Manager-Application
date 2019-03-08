@@ -39,32 +39,25 @@ class IngredientsView(generic.ListView):
 
 #----------------------------------------------------------------------------------------------------
 
-class AddRecipeView(generic.ListView):
-    context_object_name = 'ingredients_list'
-    template_name = 'recipeManager/addRecipe.html'
+def AddRecipeView(request):
+    ingredients_list = Ingredient.objects.all()
 
-    #revisar si aun se utiliza la busqueda porque creo que se quito
-    def get_queryset(self):
-        ingredients = Ingredient.objects.all()
-        if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], ingredients)
-        else:
-            return ingredients
+    if request.method == "POST":
+        recipe = Recipe.objects.create(name=request.POST['name'],
+                                       description=request.POST['description'])
+        ingredients_id = request.POST.getlist('ingredient_id')
+        quantities = request.POST.getlist('quantity')
+        for i in range(len(ingredients_id)):
+            ingredient = Ingredient.objects.get(pk=ingredients_id[i])
+            Recipe_Ingredients.objects.create(recipe=recipe,
+                                             ingredient=ingredient,
+                                             quantity=quantities[i])
+        return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
 
-#----------------------------------------------------------------------------------------------------
-
-def createRecipe(request):
-    #print(request.POST)
-    recipe = Recipe.objects.create(name=request.POST['name'],
-                                   description=request.POST['description'])
-    ingredients_id = request.POST.getlist('ingredient_id')
-    quantities = request.POST.getlist('quantity')
-    for i in range(len(ingredients_id)):
-        ingredient = Ingredient.objects.get(pk=ingredients_id[i])
-        Recipe_Ingredients.objects.create(recipe=recipe,
-                                         ingredient=ingredient,
-                                         quantity=quantities[i])
-    return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
+    context = {
+        'ingredients_list' : ingredients_list,
+        }
+    return render(request, "recipeManager/addRecipe.html", context)
 
 #----------------------------------------------------------------------------------------------------
 
