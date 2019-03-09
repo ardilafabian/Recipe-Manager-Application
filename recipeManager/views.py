@@ -151,7 +151,7 @@ def validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities):
         ingredient = Ingredient.objects.get(pk=id)
         oldQuantities.append(Recipe_Ingredients.objects.get(recipe__id=recipe.id,
                                                 ingredient__id=ingredient.id).quant)
-    assert_(len(oldQuantities) == len(newQuantities), 'Internal error at: validateQuantitiesChange')
+    assert(len(oldQuantities) == len(newQuantities), 'Internal error at: validateQuantitiesChange')
     a, b = oldQuantities, newQuantities.copy()
     a.sort()
     b.sort()
@@ -165,6 +165,19 @@ def makeIngredientsChange(recipe, recipe_ingredients_id, newQuantities):
         Recipe_Ingredients.objects.create(recipe=recipe,
                                           ingredient=Ingredient.objects.get(pk=recipe_ingredients_id[i]),
                                           quantity=newQuantities[i])
+#----------------------------------------------------------------------------------------------------
+
+#This function has the objective to be extensible and be able to add here any business validation needed
+def EditRecipeValidation(request, recipe, recipe_ingredients):
+    confirmation = True
+    if recipe.name != request['name']: Recipe.objects.filter(pk=recipe.id).update(name = request['name'])
+    if recipe.description != request['description']: Recipe.objects.filter(pk=recipe.id).update(description = request['description'])
+    recipe_ingredients_id = request.getlist('ingredient_id')
+    newQuantities = request.getlist('quantity')
+    if not(validateIngredientsChange(recipe_ingredients, recipe_ingredients_id)) or not(validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities)):
+        makeIngredientsChange(recipe, recipe_ingredients_id, newQuantities)
+    return confirmation
+
 
 #----------------------------------------------------------------------------------------------------
 
@@ -173,15 +186,13 @@ def EditRecipe(request, recipe_id):
     recipe_ingredients = Ingredient.objects.filter(recipe__id=recipe.id)
 
     if request.method == "POST":
-        if recipe.name != request.POST['name']: Recipe.objects.filter(pk=recipe_id).update(name = request.POST['name'])
-        if recipe.description != request.POST['description']: Recipe.objects.filter(pk=recipe_id).update(description = request.POST['description'])
-        recipe_ingredients_id = request.POST.getlist('ingredient_id')
-        newQuantities = request.POST.getlist('quantity')
-        if not(validateIngredientsChange(recipe_ingredients, recipe_ingredients_id)) or not(validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities)):
-            makeIngredientsChange(recipe, recipe_ingredients_id, newQuantities)
-        messages.success(request, 'Recipe edited successfully.', extra_tags='alert alert-success alert-dismissible fade show')
+        confirmation = EditRecipeValidation(request.POST, recipe, recipe_ingredients)
+        recipe = Recipe.objects.get(pk=recipe.id)
+        if confirmation:
+            messages.success(request, 'Recipe edited successfully.', extra_tags='alert alert-success alert-dismissible fade show')
+        else:
+            messages.error(request, 'Something went wrong, try again later please.', extra_tags='alert alert-danger alert-dismissible fade show')
         return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
-
     context = {'recipe' : recipe}
 
     ingredients_list = Ingredient.objects.all()
