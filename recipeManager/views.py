@@ -50,21 +50,32 @@ class IngredientsView(generic.ListView):
 
 #----------------------------------------------------------------------------------------------------
 
+def CreationAndValidationRecipeModel(request):
+    confirmation = False
+    recipe = Recipe.objects.create(name=request['name'],
+                                   description=request['description'])
+    ingredients_id = request.getlist('ingredient_id')
+    quantities = request.getlist('quantity')
+    for i in range(len(ingredients_id)):
+        ingredient = Ingredient.objects.get(pk=ingredients_id[i])
+        Recipe_Ingredients.objects.create(recipe=recipe,
+                                         ingredient=ingredient,
+                                         quantity=quantities[i])
+    return confirmation, recipe
+
+#----------------------------------------------------------------------------------------------------
+
 def AddRecipeView(request):
     ingredients_list = Ingredient.objects.all()
 
     if request.method == "POST":
-        recipe = Recipe.objects.create(name=request.POST['name'],
-                                       description=request.POST['description'])
-        ingredients_id = request.POST.getlist('ingredient_id')
-        quantities = request.POST.getlist('quantity')
-        for i in range(len(ingredients_id)):
-            ingredient = Ingredient.objects.get(pk=ingredients_id[i])
-            Recipe_Ingredients.objects.create(recipe=recipe,
-                                             ingredient=ingredient,
-                                             quantity=quantities[i])
-        messages.success(request, 'Recipe created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
-        return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
+        confirmation, recipe = CreationAndValidationRecipeModel(request.POST)
+        if confirmation:
+            messages.success(request, 'Recipe created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
+            return HttpResponseRedirect(reverse('recipeManager:recipeDetail', args=(recipe.id,)))
+        else:
+            messages.error(request, 'Something went wrong, try again later please.', extra_tags='alert alert-danger alert-dismissible fade show')
+            return HttpResponseRedirect(reverse('recipeManager:addRecipe'))
     context = {
         'ingredients_list' : ingredients_list,
         }
