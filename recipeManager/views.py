@@ -151,7 +151,7 @@ def validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities):
         ingredient = Ingredient.objects.get(pk=id)
         oldQuantities.append(Recipe_Ingredients.objects.get(recipe__id=recipe.id,
                                                 ingredient__id=ingredient.id).quant)
-    self.assert_(len(oldQuantities) == len(newQuantities), 'Internal error at: validateQuantitiesChange')
+    assert_(len(oldQuantities) == len(newQuantities), 'Internal error at: validateQuantitiesChange')
     a, b = oldQuantities, newQuantities.copy()
     a.sort()
     b.sort()
@@ -173,9 +173,8 @@ def EditRecipe(request, recipe_id):
     recipe_ingredients = Ingredient.objects.filter(recipe__id=recipe.id)
 
     if request.method == "POST":
-        itChanged = False
-        if recipe.name != request.POST['name']: recipe.name, itChanged = request.POST['name'], True
-        if recipe.description != request.POST['description']: recipe.description, itChanged = request.POST['description'], True
+        if recipe.name != request.POST['name']: Recipe.objects.filter(pk=recipe_id).update(name = request.POST['name'])
+        if recipe.description != request.POST['description']: Recipe.objects.filter(pk=recipe_id).update(description = request.POST['description'])
         recipe_ingredients_id = request.POST.getlist('ingredient_id')
         newQuantities = request.POST.getlist('quantity')
         if not(validateIngredientsChange(recipe_ingredients, recipe_ingredients_id)) or not(validateQuantitiesChange(recipe, recipe_ingredients_id, newQuantities)):
