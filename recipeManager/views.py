@@ -8,17 +8,11 @@ from .models import Recipe, Ingredient, Recipe_Ingredients
 
 #----------------------------------------------------------------------------------------------------
 
-def doSearch(searchTerm, model_name):
-    if model_name == "Ingredient":
-        if searchTerm.isdigit():
-            return Ingredient.objects.filter(id__icontains=searchTerm)
-        else:
-            return Ingredient.objects.filter(name__icontains=searchTerm)
-    elif model_name == "Recipe":
-        if searchTerm.isdigit():
-            return Recipe.objects.filter(id__icontains=searchTerm)
-        else:
-            return Recipe.objects.filter(name__icontains=searchTerm)
+def doSearch(searchTerm, list):
+    if searchTerm.isdigit():
+        return list.filter(id__icontains=searchTerm)
+    else:
+        return list.filter(name__icontains=searchTerm)
 
 #----------------------------------------------------------------------------------------------------
 
@@ -30,7 +24,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         recipes = Recipe.objects.all()
         if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], "Recipe")
+            return doSearch(self.request.GET['search'], recipes)
         else:
             return recipes
 
@@ -44,14 +38,15 @@ class IngredientsView(generic.ListView):
     def get_queryset(self):
         ingredients = Ingredient.objects.all()
         if 'search' in self.request.GET:
-            return doSearch(self.request.GET['search'], "Ingredient")
+            return doSearch(self.request.GET['search'], ingredients)
         else:
             return ingredients
 
 #----------------------------------------------------------------------------------------------------
 
+#This function has the objective to be extensible and be able to add here any business validation needed
 def CreationAndValidationRecipeModel(request):
-    confirmation = False
+    confirmation = True
     recipe = Recipe.objects.create(name=request['name'],
                                    description=request['description'])
     ingredients_id = request.getlist('ingredient_id')
@@ -89,15 +84,27 @@ class IngredientDetailView(generic.DetailView):
 
 #----------------------------------------------------------------------------------------------------
 
+#This function has the objective to be extensible and be able to add here any business validation needed
+def CreationAndValidationIngredientModel(request):
+    confirmation = True
+    ingredient = Ingredient.objects.create(name=request['name'],
+                                           cost=request['cost'],
+                                           amount=request['amount'],
+                                           unit=request['unit'])
+    return confirmation, ingredient
+
+#----------------------------------------------------------------------------------------------------
+
 def AddIngredientView(request):
     choices_list = Ingredient.UNIT_CHOICES
     if request.method == "POST":
-        ingredient = Ingredient.objects.create(name=request.POST['name'],
-                                               cost=request.POST['cost'],
-                                               amount=request.POST['amount'],
-                                               unit=request.POST['unit'])
-        messages.success(request, 'Ingredient created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
-        return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))
+        confirmation, ingredient = CreationAndValidationIngredientModel(request.POST)
+        if confirmation:
+            messages.success(request, 'Ingredient created successfully.', extra_tags='alert alert-success alert-dismissible fade show')
+            return HttpResponseRedirect(reverse('recipeManager:ingredientDetail', args=(ingredient.id,)))
+        else:
+            messages.error(request, 'Something went wrong, try again later please.', extra_tags='alert alert-danger alert-dismissible fade show')
+            return HttpResponseRedirect(reverse('recipeManager:ingredients'))
     context = {'choices_list' : choices_list}
     return render(request, "recipeManager/addIngredient.html", context)
 
@@ -166,7 +173,6 @@ def EditRecipe(request, recipe_id):
     recipe_ingredients = Ingredient.objects.filter(recipe__id=recipe.id)
 
     if request.method == "POST":
-        print(request.POST)
         itChanged = False
         if recipe.name != request.POST['name']: recipe.name, itChanged = request.POST['name'], True
         if recipe.description != request.POST['description']: recipe.description, itChanged = request.POST['description'], True

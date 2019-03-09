@@ -30,6 +30,13 @@
          <!--<p class="lead">Manage your recipes and ingredients in an easy way.</p>-->
       </div>
       <div class="container">
+        {% if messages %}
+          <ul class="messages list-unstyled">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
          <form class="form-inline my-lg-4" method="get">
             <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search ingredient.." aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -50,7 +57,7 @@
             </div>
             {% endfor %}
             {% else %}
-            <p><strong>No ingredients available.</strong></p>
+              <p><strong>No ingredients available.</strong></p>
             {% endif %}
          </div>
          {% if is_paginated %}
